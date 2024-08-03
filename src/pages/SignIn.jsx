@@ -23,7 +23,7 @@ const SignIn = () => {
     }))
   }
 
-  async function handleClick (e) {
+  async function signinUser (e) {
     e.preventDefault();
 
 
@@ -71,7 +71,7 @@ const SignIn = () => {
             <p>Don't have an account? <Link className='text-red-500 transition ease-in-out hover:text-red-700' to="/sign-up">Register</Link></p>
             <Link className='text-blue-500 hover:text-blue-700 transition ease-in-out' to="/forgot-password">Forgot Password</Link>
           </div>
-          <button className='mt-5 bg-blue-600 hover:bg-blue-700 transition rounded-sm text-white text-center w-full p-2 font-semibold' onClick={handleClick}>SIGN IN</button>
+          <button className='mt-5 bg-blue-600 hover:bg-blue-700 transition rounded-sm text-white text-center w-full p-2 font-semibold' onClick={signinUser}>SIGN IN</button>
           <p className='font-semibold text-center mt-4 mb-4'>OR</p>
           <OAuth />
         </form>

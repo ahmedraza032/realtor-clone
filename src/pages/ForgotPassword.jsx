@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { AiFillEye, AiFillEyeInvisible  } from "react-icons/ai";
 import { Link } from 'react-router-dom';
 import OAuth from '../components/OAuth';
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+import { toast } from 'react-toastify';
 
 const ForgotPassword = () => {
 
@@ -20,6 +22,22 @@ const ForgotPassword = () => {
 
   const [showPassword, setShowPassword] = useState(false);
 
+  function sendResetLink (e) {
+    e.preventDefault();
+
+    try {
+      const auth = getAuth();
+      sendPasswordResetEmail(auth, email);
+      toast.success("Reset link was sent");
+    } catch (error) {
+      toast.error("Could not send reset link!");
+    }
+
+
+
+
+  }
+
   return (
     <div>
       <h1 className='font-bold text-3xl text-center mt-6'>Forgot Password</h1>
@@ -36,7 +54,7 @@ const ForgotPassword = () => {
             <p>Don't have an account? <Link className='text-red-500 transition ease-in-out hover:text-red-700' to="/sign-up">Register</Link></p>
             <Link className='text-blue-500 hover:text-blue-700 transition ease-in-out' to="/sign-in">Sign in instead</Link>
           </div>
-          <button className='mt-5 bg-blue-600 hover:bg-blue-700 transition rounded-sm text-white text-center w-full p-2 font-semibold'>SEND RESET LINK</button>
+          <button onClick={sendResetLink} className='mt-5 bg-blue-600 hover:bg-blue-700 transition rounded-sm text-white text-center w-full p-2 font-semibold'>SEND RESET LINK</button>
           <p className='font-semibold text-center mt-4 mb-4'>OR</p>
           <OAuth />
         </form>

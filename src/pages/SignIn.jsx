@@ -34,7 +34,7 @@ const SignIn = () => {
           <input
           type="email" placeholder='Email address' id='email' value={email} onChange={onChange} className='w-full text-xl rounded-sm mb-5 transition ease-in-out'/>
           <div className='relative'>
-            <input placeholder='Password' type={showPassword ? 'password' : "text"} id='password' value={password} onChange={onChange} className='w-full text-xl rounded-sm mb-5 transition ease-in-out' />
+            <input placeholder='Password' type={!showPassword ? 'password' : "text"} id='password' value={password} onChange={onChange} className='w-full text-xl rounded-sm mb-5 transition ease-in-out' />
             {showPassword ? (
               <AiFillEyeInvisible className='absolute right-3 top-3 cursor-pointer text-xl' onClick={() => setShowPassword((prev) => !prev)}/>
             ) : <AiFillEye className='absolute right-3 top-3 cursor-pointer text-xl'

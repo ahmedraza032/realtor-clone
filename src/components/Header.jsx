@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import {useLocation, useNavigate, NavLink} from 'react-router-dom'
+import {useLocation, useNavigate, Link, NavLink} from 'react-router-dom'
 
 const Header = () => {
 
@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <div className='border-b shadow-sm sticky top-0 z-50 bg-white'>
       <div className='flex justify-between p-3 max-w-6xl mx-auto items-center '>
-      <img src="https://static.rdc.moveaws.com/images/logos/rdc-logo-default.svg" className='h-5 cursor-pointer'/>
+      <Link to='/'><img src="https://static.rdc.moveaws.com/images/logos/rdc-logo-default.svg" className='h-5 cursor-pointer'/></Link>
       <ul className='flex items-center gap-5'>
 
         <li>

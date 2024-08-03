@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
 import { AiFillEye, AiFillEyeInvisible  } from "react-icons/ai";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import OAuth from '../components/OAuth';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { toast } from 'react-toastify';
 
 const SignIn = () => {
+
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -17,6 +21,29 @@ const SignIn = () => {
       ...prevData, 
       [e.target.id]: e.target.value
     }))
+  }
+
+  async function handleClick (e) {
+    e.preventDefault();
+
+
+    try {
+
+      const auth = getAuth();
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      if (user) {
+        toast.success("Login successful");
+        navigate("/");
+      }
+
+    } catch (error) {
+      toast.error("Bad credentials")
+    }
+
+    
+
   }
 
   const [showPassword, setShowPassword] = useState(false);
@@ -44,7 +71,7 @@ const SignIn = () => {
             <p>Don't have an account? <Link className='text-red-500 transition ease-in-out hover:text-red-700' to="/sign-up">Register</Link></p>
             <Link className='text-blue-500 hover:text-blue-700 transition ease-in-out' to="/forgot-password">Forgot Password</Link>
           </div>
-          <button className='mt-5 bg-blue-600 hover:bg-blue-700 transition rounded-sm text-white text-center w-full p-2 font-semibold'>SIGN IN</button>
+          <button className='mt-5 bg-blue-600 hover:bg-blue-700 transition rounded-sm text-white text-center w-full p-2 font-semibold' onClick={handleClick}>SIGN IN</button>
           <p className='font-semibold text-center mt-4 mb-4'>OR</p>
           <OAuth />
         </form>
